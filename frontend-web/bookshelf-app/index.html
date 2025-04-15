@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Dicoding Indonesia" />
+    <meta name="description" content="Bookshelf App adalah aplikasi untuk mengatur daftar buku bacaan." />
+
+    <title>Bookshelf App</title>
+
+    <link rel="icon" type="image/png" href="assets/icon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="assets/icon/favicon.svg" />
+    <link rel="shortcut icon" href="assets/icon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icon/apple-touch-icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Courgette&family=Jost:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script defer src="main.js"></script>
+  </head>
+  <body class="bs-page">
+    <header class="bs-header">
+      <div class="bs-header__container">
+        <div class="bs-brand">
+          <a class="bs-brand__home-link" href="index.html">
+            <h1 class="bs-brand__title">Bookshelf App</h1>
+          </a>
+        </div>
+        <div class="bs-app-theme">
+          <button type="button" id="btn-app-theme" class="bs-button bs-button--hidden-text">
+            <span class="bs-button__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" id="ic-app-theme" viewBox="0 -960 960 960" width="24px" height="24px">
+                <path fill="currentColor" d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm40-83q119-15 199.5-104.5T800-480q0-123-80.5-212.5T520-797v634Z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" id="ic-light-mode" viewBox="0 -960 960 960" width="24px" height="24px">
+                <path fill="currentColor" d="M480-360q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0 80q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Zm326-268Z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" id="ic-dark-mode" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px">
+                <rect fill="none" height="24" width="24"/>
+                <path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"/>
+              </svg>
+            </span>
+            <span class="bs-button__text">Theme</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="bs-content">
+      <div id="content" class="bs-content__container">
+        <section id="add-book" class="bs-box">
+          <header class="bs-box__header">
+            <h2 class="bs-section-heading">Tambah Buku Baru</h2>
+          </header>
+          <div class="bs-box__content">
+            <form id="bookForm" data-testid="bookForm" class="bs-book-form">
+              <div class="bs-input-field">
+                <label for="bookFormTitle" class="bs-input-field__label">Judul</label>
+                <input id="bookFormTitle" type="text" required data-testid="bookFormTitleInput" class="bs-input-field__input" maxlength="100" />
+              </div>
+              <div class="bs-input-field">
+                <label for="bookFormAuthor" class="bs-input-field__label">Penulis</label>
+                <input id="bookFormAuthor" type="text" required data-testid="bookFormAuthorInput" class="bs-input-field__input" maxlength="80" />
+              </div>
+              <div class="bs-input-field">
+                <label for="bookFormYear" class="bs-input-field__label">Tahun</label>
+                <input id="bookFormYear" type="number" required data-testid="bookFormYearInput" class="bs-input-field__input" min="0" />
+              </div>
+              <div class="bs-input-field">
+                <label for="bookFormIsComplete" class="bs-input-field__label">Selesai dibaca</label>
+                <input
+                  id="bookFormIsComplete"
+                  type="checkbox"
+                  data-testid="bookFormIsCompleteCheckbox"
+                  class="bs-input-field__checkbox"
+                />
+              </div>
+              <button id="bookFormSubmit" type="submit" data-testid="bookFormSubmitButton" class="bs-button-filled">
+                Masukkan buku ke rak <span class="bs-shelf-name">Belum selesai dibaca</span>
+              </button>
+            </form>
+          </div>
+        </section>
+  
+        <section id="search-book" class="bs-box">
+          <header class="bs-box__header">
+            <h2 class="bs-section-heading">Cari Buku</h2>
+          </header>
+          <div class="bs-box__content">
+            <form id="searchBook" data-testid="searchBookForm" class="bs-search-book__form">
+              <label for="searchBookTitle" class="bs-search-book__label">Judul</label>
+              <input id="searchBookTitle" type="text" data-testid="searchBookFormTitleInput" class="bs-search-book__input" />
+              <button id="searchSubmit" type="submit" data-testid="searchBookFormSubmitButton" class="bs-button-filled">
+                Cari
+              </button>
+            </form>
+          </div>
+        </section>
+
+        <section class="bs-box">
+          <header class="bs-box__header">
+            <h2 class="bs-section-heading">Belum Selesai Dibaca</h2>
+          </header>
+          <div id="bookshelf-unfinished" class="bs-box__content bs-bookshelf">
+            <div class="bs-bookshelf__searching-info"></div>
+            <div id="incompleteBookList" data-testid="incompleteBookList" class="bs-bookshelf__item-container"></div>
+            <div class="bs-bookshelf__empty-message"></div>
+          </div>
+        </section>
+  
+        <section class="bs-box">
+          <header class="bs-box__header">
+            <h2 class="bs-section-heading">Selesai Dibaca</h2>
+          </header>
+          <div id="bookshelf-finished" class="bs-box__content bs-bookshelf">
+            <div class="bs-bookshelf__searching-info"></div>
+            <div id="completeBookList" data-testid="completeBookList" class="bs-bookshelf__item-container"></div>
+            <div class="bs-bookshelf__empty-message"></div>
+          </div>
+        </section>
+      </div>
+
+      <div id="modal" class="bs-modal-container">
+        <div id="modal-edit-item" class="bs-modal">
+          <div class="bs-modal__box">
+            <header class="bs-modal__header">
+              <div class="bs-modal__title">Edit Buku</div>
+              <div class="bs-modal__action-close">
+                <button type="button" class="bs-button bs-button--hidden-text bs-modal__close-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" class="bs-button__icon">
+                    <path fill="currentColor" d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+                  </svg>
+                  <span class="bs-button__text">Close</span>
+                </button>
+              </div>
+            </header>
+            <div class="bs-modal__content">
+              <form id="book-form-edit" class="bs-book-form">
+                <div class="bs-input-field">
+                  <label for="input-edit-book-title" class="bs-input-field__label">Judul</label>
+                  <input id="input-edit-book-title" type="text" required class="bs-input-field__input" maxlength="100" />
+                </div>
+                <div class="bs-input-field">
+                  <label for="input-edit-book-author" class="bs-input-field__label">Penulis</label>
+                  <input id="input-edit-book-author" type="text" required class="bs-input-field__input" maxlength="80" />
+                </div>
+                <div class="bs-input-field">
+                  <label for="input-edit-book-year" class="bs-input-field__label">Tahun</label>
+                  <input id="input-edit-book-year" type="number" required class="bs-input-field__input" min="0" />
+                </div>
+                <div class="bs-book-form__action">
+                  <button type="button"  class="bs-button-filled bs-book-form__button bs-modal__cancel-button">
+                    Batal
+                  </button>
+                  <button type="submit" class="bs-button-filled bs-book-form__button">
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="snackbar" class="bs-snackbar-container"></div>
+    </main>
+
+    <footer class="bs-footer">
+      <div class="bs-footer__container">
+        <div class="bs-words">
+          <p class="bs-words__main bs-words__main--hidden">
+            Hidup adalah perjalanan penuh pelajaran.
+          </p>
+          <p class="bs-words__additional bs-words__additional--hidden">
+            Setiap langkah yang kita ambil akan membawa lebih dekat pada tujuan.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
