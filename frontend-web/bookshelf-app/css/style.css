@@ -1,6 +1,4 @@
 :root {
-  scroll-behavior: smooth;
-
   --color-primary: light-dark(#212121, #ffffff);
   --color-primary-dim: light-dark(#5e7aad, #64b5f6);
   --color-primary-bright: light-dark(#1976d2, #b0d5fb);
@@ -52,15 +50,19 @@
   --dimen-radius-max: calc(1px * infinity);
 }
 
-:root[data-theme="default"] {
+html {
+  scroll-behavior: smooth;
+}
+
+html[data-theme="default"] {
   color-scheme: light dark;
 }
 
-:root[data-theme="light"] {
+html[data-theme="light"] {
   color-scheme: light;
 }
 
-:root[data-theme="dark"] {
+html[data-theme="dark"] {
   color-scheme: dark;
 }
 
@@ -193,11 +195,11 @@ button {
   text-decoration: none;
   color: inherit;
 
-  &:hover {
-    text-shadow: 3px 1px 6px #d5ba8d;
-  }
   &:visited {
     color: inherit;
+  }
+  &:hover {
+    text-shadow: 3px 1px 6px #d5ba8d;
   }
 }
 
@@ -408,7 +410,6 @@ button {
   left: 0;
 
   background-color: var(--color-overlay);
-
 }
 
 .bs-modal--open {
@@ -435,7 +436,6 @@ button {
 
   transform: translateY(-20%);
   opacity: 0;
-
 }
 
 .bs-modal__box--show {
@@ -577,7 +577,6 @@ button {
 }
 
 @media screen and (max-width: 768px) {
-
   .bs-modal__box {
     max-width: calc(100vw - 2rem);
     max-height: calc(100vh - 100px);
