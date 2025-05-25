@@ -165,53 +165,33 @@ function makeItem(data) {
   bookItem.setAttribute(ATTR_DATA_TEST_ID, 'bookItem');
   bookItem.classList.add(CN_BOOK_ITEM);
 
-  const titleElement = document.createElement('h3');
-  titleElement.innerText = data.title;
-  titleElement.setAttribute(ATTR_DATA_TEST_ID, 'bookItemTitle');
-  titleElement.classList.add(CN_BOOK_ITEM_TITLE);
+  const textOnCompleteButton = data.isComplete ? "belum" : "sudah";
+  const bookItemChild = `
+  <h3 ${ATTR_DATA_TEST_ID}="bookItemTitle" class="${CN_BOOK_ITEM_TITLE}">${data.title}</h3>
+  <p ${ATTR_DATA_TEST_ID}="bookItemAuthor" class="${CN_BOOK_ITEM_AUTHOR}">Penulis: ${data.author}</p>
+  <p ${ATTR_DATA_TEST_ID}="bookItemYear" class="${CN_BOOK_ITEM_YEAR}">Tahun: ${data.year}</p>
+  <div class="bs-book-item__action">
+    <button ${ATTR_DATA_TEST_ID}="bookItemIsCompleteButton" class="bs-button-outlined">Tandai ${textOnCompleteButton} selesai</button>
+    <button ${ATTR_DATA_TEST_ID}="bookItemDeleteButton" class="bs-button-filled">Hapus</button>
+    <button ${ATTR_DATA_TEST_ID}="bookItemEditButton" class="bs-button-filled">Edit</button>
+  </div>`;
 
-  const authorElement = document.createElement('p');
-  authorElement.innerText = `Penulis: ${data.author}`;
-  authorElement.setAttribute(ATTR_DATA_TEST_ID, 'bookItemAuthor');
-  authorElement.classList.add(CN_BOOK_ITEM_AUTHOR);
-
-  const yearElement = document.createElement('p');
-  yearElement.innerText = `Tahun: ${data.year}`;
-  yearElement.setAttribute(ATTR_DATA_TEST_ID, 'bookItemYear');
-  yearElement.classList.add(CN_BOOK_ITEM_YEAR);
-
-  const actionContainer = document.createElement('div');
-  actionContainer.classList.add('bs-book-item__action');
-
-  const btnActionComplete = document.createElement('button');
-  btnActionComplete.innerText = data.isComplete ? 'Tandai belum selesai' : 'Tandai sudah selesai';
-  btnActionComplete.setAttribute(ATTR_DATA_TEST_ID, 'bookItemIsCompleteButton');
-  btnActionComplete.classList.add('bs-button-outlined');
-  btnActionComplete.addEventListener('click', () => {
-    toggleItemComplete(data.id);
-  });
-
-  const btnDelete = document.createElement('button');
-  btnDelete.innerText = 'Hapus';
-  btnDelete.setAttribute(ATTR_DATA_TEST_ID, 'bookItemDeleteButton');
-  btnDelete.classList.add('bs-button-filled');
-  btnDelete.addEventListener('click', () => {
-    const isDelete = confirm('Apakah anda yakin ingin menghapus buku ini?');
-    if (isDelete) {
-      removeItem(data.id);
+  bookItem.innerHTML = bookItemChild;
+  bookItem.addEventListener('click', (evt) => {
+    const dataTestId = evt.target.getAttribute(ATTR_DATA_TEST_ID);
+    if (dataTestId === "bookItemIsCompleteButton") {
+      toggleItemComplete(data.id);
+    }
+    else if (dataTestId === "bookItemDeleteButton") {
+      const doRemove = confirm('Apakah anda yakin ingin menghapus buku ini?');
+      if (doRemove) {
+        removeItem(data.id);
+      }
+    }
+    else if (dataTestId === "bookItemEditButton") {
+      showModal('modal-edit-item', data);
     }
   });
-
-  const btnEdit = document.createElement('button');
-  btnEdit.innerText = 'Edit';
-  btnEdit.setAttribute(ATTR_DATA_TEST_ID, 'bookItemEditButton');
-  btnEdit.classList.add('bs-button-filled');
-  btnEdit.addEventListener('click', () => {
-    showModal('modal-edit-item', data)
-  });
-
-  actionContainer.append(btnActionComplete, btnDelete, btnEdit);
-  bookItem.append(titleElement, authorElement, yearElement, actionContainer);
  
   return bookItem;
 }
